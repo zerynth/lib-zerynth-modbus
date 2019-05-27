@@ -1,0 +1,11 @@
+{
+    "files": [
+        [
+            "modbus",
+            "modbus.py"
+        ]
+    ],
+    "title": "Zerynth Modbus",
+	"copyright": "Zerynth Team",
+    "version": "1.0.0"
+}

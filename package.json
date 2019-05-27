@@ -1,0 +1,21 @@
+{
+    "dependencies": {},
+    "description": "Library for IO operation on the modbus protocol",
+    "fullname": "lib.zerynth.modbus",
+    "git_pointer": "zerynth://zerynth-libs/zerynth-modbus",
+    "info": {
+        "chip_manufacturer": "-",
+        "chip_name": "-",
+        "name": "Zerynth Modbus Library",
+        "type": "protocol"
+    },
+    "keywords": [
+        "modbus",
+        "serial",
+        "master"
+    ],
+    "repo": "official",
+    "title": "Modbus",
+    "version": "r2.2.0",
+    "whatsnew": ""
+}
