@@ -1,0 +1,14 @@
+---
+description: Library for IO operation on the modbus protocol
+fullname: lib.zerynth.modbus
+info:
+    chip_manufacturer: '-'
+    chip_name: '-'
+    name: Zerynth Modbus Library
+    type: protocol
+keywords:
+- modbus
+- serial
+- master
+title: Modbus
+...
