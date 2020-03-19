@@ -113,7 +113,7 @@ new_exception(ModbusGatewayTargetDeviceFailed, ModbusException, "No response was
 class Modbus():
     def __init__(self, endpoint, send_fn, recv_fn):
         self.callbacks = {}
-        self.endpoint = 1
+        self.endpoint = endpoint
         self.send_fn = send_fn
         self.recv_fn = recv_fn
     
@@ -203,7 +203,7 @@ class Modbus():
     def _write_register(self, address, value):
         if address < 0 or address > 0xffff:
             raise ModbusBadAddress
-        if value < 0 or address > 0xffff:
+        if value < 0 or value > 0xffff:
             raise ModbusBadData
         pdu = self._req_pdu(FN_WRITE_REGISTER, 2, address, 2, value)
         self.send_fn(self.endpoint, pdu)
@@ -542,11 +542,14 @@ ModbusSerial class
 
     :param serial_device: an object representing the device. It must implement read, write and close methods to \
         communicate with the serial port. See **rs485** in the example folder.
+
+    :param receive_sleep: timeout on the receiving function; 
     """
-    def __init__(self, identifier, serial_device):
+    def __init__(self, identifier, serial_device, receive_sleep = 250):
         self.modbus = Modbus(identifier, self._send_serial, self._recv_serial)
         self.identifier = identifier
         self.serial_device = serial_device
+        self.receive_sleep = receive_sleep
 
         self.modbus._register_callback(FN_READ_COILS, self._rsp_read_coils)
         self.modbus._register_callback(FN_READ_DISCRETE, self._rsp_read_discrete)
@@ -592,7 +595,7 @@ ModbusSerial class
         self.serial_device.write(packet)
         
     def _recv_serial(self):
-        sleep(2000)
+        sleep(self.receive_sleep)
         packet = self.serial_device.read()
         return packet[1:]
 
