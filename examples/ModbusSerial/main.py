@@ -13,21 +13,21 @@ try:
     device = rs485.RS485(100000)
     # Wait for the serial port to open. This may not be necessary
     sleep(10000)
-    master = modbus.ModbusSerial(1, serial_device = device)
+    main = modbus.ModbusSerial(1, serial_device = device)
 
-    result = master.write_register(5, 745)
+    result = main.write_register(5, 745)
     print("Written discrete register: ", result)
 
-    result = master.write_multiple_registers(2, 4, [55, 555, 123, 42])
+    result = main.write_multiple_registers(2, 4, [55, 555, 123, 42])
     print("Written ", result, " registers")
 
-    discrete = master.read_discrete(2, 4)
+    discrete = main.read_discrete(2, 4)
     print("Discrete inputs values: ", discrete)
 
-    holding = master.read_holding(3, 2)
+    holding = main.read_holding(3, 2)
     print("Holding registers values: ", holding)
 
-    master.close()
+    main.close()
     print("Closed.")
 	
 except Exception as e:

@@ -4,7 +4,7 @@
 ***************
 MODBUS Library
 ***************
-    To talk with a slave device an object of type ModbusTCP or ModbusSerial must be\
+    To talk with a subordinate device an object of type ModbusTCP or ModbusSerial must be\
         initialized, depending on what kind of communication is needed.
 
     If serial communication is used, a device object that implements write, read and close methods is needed:
@@ -59,7 +59,7 @@ MODBUS Library
                 self.port.close()
         
         
-    When a connection with a slave device has been established, coils and registers can be accessed with the methods in each class.
+    When a connection with a subordinate device has been established, coils and registers can be accessed with the methods in each class.
 
     """
 
@@ -242,9 +242,9 @@ ModbusTCP class
 
 .. class:: ModbusTCP(identifier)
 
-    Create an instance of the ModbusTCP class which allow modbus communication with slave device using TCP.
+    Create an instance of the ModbusTCP class which allow modbus communication with subordinate device using TCP.
     
-    :param identifier: The slave device identifier, used in the header of every packet.
+    :param identifier: The subordinate device identifier, used in the header of every packet.
 
     """
     def __init__(self, identifier):
@@ -488,7 +488,7 @@ ModbusTCP class
         return pdu
 
     def _send_tcp(self, endpoint, pdu):
-        # 2 bytes (TransmissionID) + 2 bytes (Protocol ID) + 2 bytes (Length) + 1 byte (Slave Device ID) + N bytes (pdu) + 2 bytes (CRC)
+        # 2 bytes (TransmissionID) + 2 bytes (Protocol ID) + 2 bytes (Length) + 1 byte (Subordinate Device ID) + N bytes (pdu) + 2 bytes (CRC)
         packet = bytearray(7 + len(pdu))
         bs = bytes_to_bytearray(self.transmissionID)
         # Transmission ID
@@ -501,7 +501,7 @@ ModbusTCP class
         length = bytes_to_bytearray(len(pdu) + 1)
         packet[4] = length[0]
         packet[5] = length[1]
-        # Slave Device ID
+        # Subordinate Device ID
         packet[6] = endpoint
         # PDU
         packet[7:] = pdu
@@ -512,8 +512,8 @@ ModbusTCP class
         """
         .. method:: connect(address, [port = 502])
             
-            :param address: the ip address of the slave device
-            :param port: port on which the slave device is listening to
+            :param address: the ip address of the subordinate device
+            :param port: port on which the subordinate device is listening to
         """
         self._socket.connect((address, port))
         
@@ -521,7 +521,7 @@ ModbusTCP class
         """
         .. method:: close()
 
-            close the connection with the slave device 
+            close the connection with the subordinate device 
 
         """
         self._socket.close()
@@ -536,9 +536,9 @@ ModbusSerial class
 
 .. class:: ModbusSerial(identifier, serial_device)
 
-    Create an instance of the ModbusSerial class which allow modbus communication with slave device using RTU.
+    Create an instance of the ModbusSerial class which allow modbus communication with subordinate device using RTU.
     
-    :param identifier: The slave device identifier
+    :param identifier: The subordinate device identifier
 
     :param serial_device: an object representing the device. It must implement read, write and close methods to \
         communicate with the serial port. See **rs485** in the example folder.
