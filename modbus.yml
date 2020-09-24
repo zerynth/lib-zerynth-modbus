@@ -1,0 +1,10 @@
+options:
+    # modbus defines
+    # enable modbus tcp
+    MODBUS_TCP: 
+        help: >
+            Set to 'true' to enable Modbus protocol over tcp; set to null to disable
+    # enable modbus serial
+    MODBUS_SERIAL: 
+        help: >
+            Set to 'true' to enable Modbus protocol over RS485; set to null to disable

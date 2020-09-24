@@ -232,7 +232,7 @@ class Modbus():
         rsp = self.recv_fn()
         return self.callbacks[rsp[0]](rsp)
 
-
+#-if MODBUS_TCP
 class ModbusTCP():
     """
 
@@ -526,7 +526,8 @@ ModbusTCP class
         """
         self._socket.close()
 
-
+#-endif
+#-if MODBUS_SERIAL
 class ModbusSerial():
     """
 
@@ -813,6 +814,7 @@ ModbusSerial class
             Close the serial port by calling the close function implemented by the device class.
         """ 
         self.serial_device.close()
+#-endif
 
 def bytes_to_bytearray(num):
     ret = bytearray(2)
