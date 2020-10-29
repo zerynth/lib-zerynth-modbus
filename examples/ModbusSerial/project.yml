@@ -1,0 +1,4 @@
+---
+config:
+    MODBUS_SERIAL: true
+...

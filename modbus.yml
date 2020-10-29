@@ -8,3 +8,7 @@ options:
     MODBUS_SERIAL: 
         help: >
             Set to 'true' to enable Modbus protocol over RS485; set to null to disable
+    # enable debug prints
+    MODBUS_DEBUG: 
+        help: >
+            Set to 'true' to enable debug prints of Modbus library; set to null to disable
